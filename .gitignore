@@ -38,6 +38,8 @@
 *.exe
 *.out
 *.app
+*.o
+*.bin
 
 # Build directories
 build/
