@@ -3,7 +3,7 @@
 
 #include <cstdint> 
 #include <string>
-#include <ifstream>
+#include <fstream>
 #include <vector> 
 #include "../Error_Handers/error_handling.h"
 #include "../../Timing_Components/Timing_Wrapper/timing_wrapper.hpp"
@@ -20,6 +20,6 @@ class BatchProcessor {
         std::string inputFilePath; 
         size_t linesProcessed; 
         size_t linesFailed; 
-}
+}; 
 
 #endif
