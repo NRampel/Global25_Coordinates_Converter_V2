@@ -11,13 +11,13 @@
     #define NO_RETURN _Noreturn
 #endif
 
-#ifdef _cplusplus
+#ifdef __cplusplus
 extern "C" {
 #endif
 
     NO_RETURN void error_handle(uint8_t errorCode);
 
-#ifdef _cplusplus
+#ifdef __cplusplus
 }
 #endif
 

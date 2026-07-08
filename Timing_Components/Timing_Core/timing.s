@@ -1,3 +1,4 @@
+.intel_syntax noprefix
 .global get_clock_cycles
 
 get_clock_cycles: 

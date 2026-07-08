@@ -1,7 +1,7 @@
 #ifndef G25_MATH_H
 #define G25_MATH_H 
 
-#include "g25.h"
+#include "../g25.h"
 
 #ifdef __cplusplus
 extern "C" {

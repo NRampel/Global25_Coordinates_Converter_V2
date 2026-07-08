@@ -23,19 +23,29 @@ COMMON_SRCS_C := \
     G25_Components/G25_Initialization/g25_init.c \
     G25_Components/G25_Math/g25_math.c \
     Timing_Components/Timing_Core/timing.c
-COMMON_SRCS_ASM := Timing_Components/Timing_Core/timing.s
+
+# Handle the assembly source file separately to avoid name collisions
+TIMING_ASM_SRC := Timing_Components/Timing_Core/timing.s
 
 MAIN_SRC1 := unscaled_to_scaled.cpp
 MAIN_SRC2 := scaled_to_unscaled.cpp
 
+# --- Object File Definitions ---
+# Create a unique object file for the assembly source (e.g., timing_asm.o)
+TIMING_ASM_OBJ := $(TIMING_ASM_SRC:.s=_asm.o)
+
 COMMON_OBJS := \
     $(COMMON_SRCS_CPP:.cpp=.o) \
-    $(COMMON_SRCS_C:.c=.o) \
-    $(COMMON_SRCS_ASM:.s=.o)
+    $(COMMON_SRCS_C:.c=.o)   \
+    $(TIMING_ASM_OBJ)
 
 MAIN_OBJ1 := $(MAIN_SRC1:.cpp=.o)
 MAIN_OBJ2 := $(MAIN_SRC2:.cpp=.o)
 
+# --- Aggregate lists for cleaning ---
+# These MUST be defined after all object and target variables
+EXECUTABLES := $(TARGET1) $(TARGET2)
+OBJECTS := $(COMMON_OBJS) $(MAIN_OBJ1) $(MAIN_OBJ2)
 
 .PHONY: all
 all: $(TARGET1) $(TARGET2)
@@ -53,9 +63,15 @@ $(TARGET2): $(MAIN_OBJ2) $(COMMON_OBJS)
 %.o: %.c
 	$(CC) $(CFLAGS) $(INCLUDES) -c -o $@ $<
 
-%.o: %.s
-	$(CC) $(CFLAGS) -c -o $@ $<
+# This rule correctly builds a file like 'timing_asm.o' from 'timing.s'
+%_asm.o: %.s
+	$(CC) $(CFLAGS) $(INCLUDES) -c -o $@ $<
 
 .PHONY: clean
+# Use 'del' on Windows and 'rm' on other systems for portability.
 clean:
-	-del $(TARGET1) $(TARGET2) $(COMMON_OBJS) $(MAIN_OBJ1) $(MAIN_OBJ2)
+ifeq ($(OS),Windows_NT)
+	-del /F /Q $(subst /,\,$(OBJECTS)) $(subst /,\,$(EXECUTABLES)) 2>nul
+else
+	-rm -f $(OBJECTS) $(EXECUTABLES)
+endif
