@@ -22,4 +22,4 @@ extern "C" {
 #endif
 
 
-#endif // ERROR_HANDLING_H
+#endif
