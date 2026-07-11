@@ -16,7 +16,6 @@ class ScopedTimer {
             auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - m_Start);
             std::cout << "[TIMER] " << m_Name << ": " << duration.count() << " us\n";
         };    
-
     private:
         std::string m_Name;
         std::chrono::time_point<std::chrono::high_resolution_clock> m_Start;
@@ -30,7 +29,6 @@ class ScopedCycleCounter {
             uint64_t elapsed = get_clock_cycles() - m_StartCycles;
             std::cout << "[CYCLES] " << m_Name << ": " << elapsed << " cycles\n";
         }
-
     private:
         std::string m_Name;
         uint64_t m_StartCycles;
