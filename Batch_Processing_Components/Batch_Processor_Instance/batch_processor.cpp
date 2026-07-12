@@ -29,6 +29,8 @@ void BatchProcessor::run() {
         outFile << outputBuffer;
         outFile.close();
         std::cout << "Data successfully written to 'converted_output.txt'.\n";
+        std::cout << "Please move the file out of this directory and rename it to use!\n"; 
+        std::cout << "--------------------------------------------------------------------\n"; 
     } 
     else std::cout << "Failed to write output file.\n";
 }
