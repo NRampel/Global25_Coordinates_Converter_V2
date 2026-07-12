@@ -18,11 +18,22 @@ BatchProcessor::~BatchProcessor() {
 }
 
 void BatchProcessor::run() {
-    ScopedTimer timer("Batch Processing");
-    processFile();
+    std::string outputBuffer; 
+    outputBuffer.reserve(2000*150); 
+    {
+        ScopedTimer timer("Batch Processing");
+        processFile(outputBuffer);
+    }
+    std::ofstream outFile(m_outputFilePath);
+    if (outFile.is_open()) {
+        outFile << outputBuffer;
+        outFile.close();
+        std::cout << "Data successfully written to 'converted_output.txt'.\n";
+    } 
+    else std::cout << "Failed to write output file.\n";
 }
 
-bool BatchProcessor::processLine(const std::string& line) {
+bool BatchProcessor::processLine(const std::string& line, std::string& outputBuffer) {
     std::string segment;
     std::vector<float> coords;
     std::stringstream ss(line);
@@ -36,21 +47,18 @@ bool BatchProcessor::processLine(const std::string& line) {
         }
     }
     if (coords.size() != DIMS) return false; 
-    m_lineProcessor(sampleName, coords);
+    m_lineProcessor(sampleName, coords, outputBuffer);
 
     return true;
 }
 
-void BatchProcessor::processFile() {
+void BatchProcessor::processFile(std::string& outputBuffer) {
     std::ifstream inputFile(m_inputFilePath);
     if (!inputFile.is_open()) error_handle(1);
     std::string line;
     while (std::getline(inputFile, line)) {
         if (line.empty() || line[0] == '#') continue; 
-        if (processLine(line)) {
-            m_linesProcessed++;
-        } else {
-            m_linesFailed++;
-        }
+        if (processLine(line, outputBuffer)) m_linesProcessed++;
+        else m_linesFailed++;
     }
 }
