@@ -1,4 +1,4 @@
-# Global25_Coordinates_Converter_V2
+# Global25 Coordinates Converter_V2
 A high-performance batch processing tool that is designed to convert Global25 (G25) Coordinates between their scaled and unscaled formats. 
 
 Built with a focus on execution speed and close to bare-metal optimization. This tool utilizes a C++ file I/O wrapper around a pre-calculated C math engine. The pipeline is profited using native x86 'rdtsc' Assembly instructions for zero-overhead, cycle-accurate benchmarking. 
@@ -28,3 +28,11 @@ make
 ./converter
 ```
 * Move the created file outside the root directory and rename it
+
+### How to Contribute (or just compile)
+
+```markdown
+## Building This project uses GNU Make for build automation.
+- `make` / mingw32-make : Compiles the C, C++, and Assembly source files.
+- `make clean` / mingw32-make clean : Removes binary artifacts and the generated `.txt` output to reset the directory.
+```
