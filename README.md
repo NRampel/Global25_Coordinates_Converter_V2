@@ -11,7 +11,7 @@ Built with a focus on execution speed and close to bare-metal optimization. This
 ### Prerequisites
 * A `g++` & `gcc` compiler (preferably [MinGW-w64](https://www.mingw-w64.org/)).
 * `GNU Make` for executing build commands.
-# 
+
 ## Usage
 **Windows**
 * Compile the project using `mingw32-make`, then run the executable:
