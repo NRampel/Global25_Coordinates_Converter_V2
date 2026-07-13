@@ -11,3 +11,20 @@ Built with a focus on execution speed and close to bare-metal optimization. This
 ### Prerequisites
 * A `g++` & `gcc` compiler (preferably [MinGW-w64](https://www.mingw-w64.org/)).
 * `GNU Make` for executing build commands.
+
+## Usage
+**Windows**
+* Compile the project using `mingw32-make`, then run the executable:
+```bash
+mingw32-make
+.\converter.exe
+```
+* Move the created file outside the root directory and rename it
+
+**Linux** 
+* Compile the project using `make`, then run the executable:
+```bash
+make
+./converter
+```
+* Move the created file outside the root directory and rename it
