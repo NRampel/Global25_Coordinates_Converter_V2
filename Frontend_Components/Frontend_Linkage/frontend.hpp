@@ -10,6 +10,4 @@
 void convertToUnscaled(const std::string& sampleName, const std::vector<float>& coords, std::string& buffer); 
 void convertToScaled(const std::string& sampleName, const std::vector<float>& coords, std::string& buffer); 
 
-
-
 #endif 
