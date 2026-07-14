@@ -1,0 +1,44 @@
+name: x86-64 Native Build Pipeline
+
+# Trigger the workflow on pushes and pull requests to the main branch
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-and-profile:
+    runs-on: ubuntu-latest
+
+    steps:
+    # 1. Pull down your repository code
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    # 2. Verify the x86-64 hardware environment (Good for build logs)
+    - name: Display CPU Architecture
+      run: |
+        lscpu | grep "Architecture\|Model name"
+        gcc --version
+
+    # 3. Execute your Makefile
+    # (Assuming your Makefile has standard 'clean' and 'all' targets)
+    - name: Compile C/C++ Engine
+      run: |
+        make clean
+        make
+
+    # 4. Run the executable to ensure no segfaults or immediate exit codes
+    - name: Execute Conversion Benchmark
+      # Replace 'input.txt' with a sample dummy file if your program requires one to run
+      run: |
+        ./converter --help 
+        
+    # Optional: Upload the compiled binary as a GitHub artifact
+    - name: Upload Binary Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: global25-converter-x86-linux
+        path: ./converter
+        retention-days: 5
