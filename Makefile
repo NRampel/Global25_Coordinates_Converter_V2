@@ -1,12 +1,20 @@
-# Compiler and flags
+# --- OS-Aware Configuration ---
+ifeq ($(OS),Windows_NT)
+    TARGET := converter.exe
+    CLEAN_CMD := del /S /Q *.o 2>nul & del /Q $(TARGET) 2>nul
+    LDFLAGS := -static-libgcc -static-libstdc++ -lssp
+else
+    TARGET := converter
+    CLEAN_CMD := rm -f $(OBJS) $(TARGET)
+    LDFLAGS :=
+endif
+
+# --- Compiler and Flags ---
 CXX := g++
 CC := gcc
 
 CXXFLAGS := -std=c++17 -Wall -Wextra -O2
 CFLAGS := -std=c11 -Wall -Wextra -O2
-LDFLAGS :=
-
-TARGET := converter.exe
 
 INCLUDES := \
     -I./Batch_Processing_Components/Batch_Processor_Instance \
@@ -18,6 +26,7 @@ INCLUDES := \
     -I./Frontend_Components/UI \
     -I./Frontend_Components/Frontend_Linkage
 
+# --- Source Files ---
 SRCS_CPP := \
     main.cpp \
     Batch_Processing_Components/Batch_Processor_Instance/batch_processor.cpp \
@@ -42,6 +51,7 @@ OBJS := \
 
 .PHONY: all clean
 
+# --- Build Rules ---
 all: $(TARGET)
 
 $(TARGET): $(OBJS)
@@ -56,11 +66,6 @@ $(TARGET): $(OBJS)
 %_asm.o: %.s
 	$(CC) $(CFLAGS) $(INCLUDES) -c -o $@ $<
 
-# Directives must be outside the recipe block
-ifeq ($(OS),Windows_NT)
+# --- Clean Rule ---
 clean:
-	-del /F /Q $(subst /,\,$(OBJS)) $(subst /,\,$(TARGET)) 2>nul
-else
-clean:
-	-rm -f $(OBJS) $(TARGET)
-endif
+	-$(CLEAN_CMD)

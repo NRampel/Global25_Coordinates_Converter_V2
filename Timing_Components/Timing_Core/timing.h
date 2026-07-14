@@ -2,7 +2,13 @@
 #define TIMING_H
 
 #include <stdint.h>
-#include <windows.h>
+
+#ifdef _WIN32
+    #include <windows.h>
+#else 
+    #include <unistd.h>  
+    #include <sys/time.h>   
+#endif
 
 #ifdef __cplusplus
 extern "C" {

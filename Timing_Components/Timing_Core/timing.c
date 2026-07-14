@@ -4,7 +4,11 @@ static uint64_t cpuFreq = 0;
 
 static void calibrate_cpu_frequency() {
     uint64_t start = get_clock_cycles(); 
-    Sleep(1000); 
+    #ifdef _WIN32
+        Sleep(1000); 
+    #else 
+        usleep(1000); 
+    #endif
     uint64_t end = get_clock_cycles(); 
     cpuFreq = end - start; 
 }
