@@ -33,7 +33,7 @@ jobs:
     - name: Execute Conversion Benchmark
       # Replace 'input.txt' with a sample dummy file if your program requires one to run
       run: |
-       echo -e "1\n3\n" | ./converter
+       echo -e "3\n3\n" | ./converter
         
     # Optional: Upload the compiled binary as a GitHub artifact
     - name: Upload Binary Artifact
