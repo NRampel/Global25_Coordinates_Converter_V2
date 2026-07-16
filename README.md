@@ -41,4 +41,4 @@ This tool utilizes a hybrid architecture to achieve sub-millisecond batch proces
 - **C/C++ Pipeline:** Minimalist overhead design, focusing on direct memory manipulation and raw pointer arithmetic to maximize cache efficiency.
 
 ## Notes 
-* This is a work in progress project
+* This project is a work in progress, changes will be made accordingly
