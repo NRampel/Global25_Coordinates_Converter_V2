@@ -32,8 +32,8 @@ make
 ### How to Contribute (or just compile)
 ```markdown
 ## Building This project uses GNU Make for build automation.
-- `make` / mingw32-make : Compiles the C, C++, and Assembly source files.
-- `make clean` / mingw32-make clean : Removes binary artifacts and the generated `.txt` output to reset the directory.
+- `make` / `mingw32-make` : Compiles the C, C++, and Assembly source files.
+- `make clean` / `mingw32-make clean` : Removes binary artifacts and the generated `.txt` output to reset the directory.
 ```
 ## Optimization Philosophy
 This tool utilizes a hybrid architecture to achieve sub-millisecond batch processing:
