@@ -39,3 +39,6 @@ make
 This tool utilizes a hybrid architecture to achieve sub-millisecond batch processing:
 - **Assembly Core:** Hand-optimized x86 `rdtsc` instructions for cycle-accurate profiling.
 - **C/C++ Pipeline:** Minimalist overhead design, focusing on direct memory manipulation and raw pointer arithmetic to maximize cache efficiency.
+
+## Notes 
+* This is a work in progress project
