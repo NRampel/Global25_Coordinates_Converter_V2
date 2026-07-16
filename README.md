@@ -42,3 +42,4 @@ This tool utilizes a hybrid architecture to achieve sub-millisecond batch proces
 
 ## Notes 
 * This project is a work in progress, changes will be made accordingly
+* Status: [![x86-64 Native Build Pipeline](https://github.com/NRampel/Global25_Coordinates_Converter_V2/actions/workflows/naitve_build_pipeline.yml/badge.svg)](https://github.com/NRampel/Global25_Coordinates_Converter_V2/actions/workflows/naitve_build_pipeline.yml)
